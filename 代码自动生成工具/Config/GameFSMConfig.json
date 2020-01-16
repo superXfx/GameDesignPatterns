@@ -1,0 +1,42 @@
+{
+  "fileSuffix": "_Global",
+  "relativePath": "../../../../../",
+  "state": {
+    "eGameState": [
+      {
+        "stateName": "eInitialState",
+        "callFunc": [
+          "changeState(eGameState.eLoading)"
+        ]
+      },
+      {
+        "stateName": "eLoading",
+        "callFunc": [
+          "changeState(eGameState.ePlaying)"
+        ]
+      },
+      {
+        "stateName": "ePlaying",
+        "callFunc": []
+      },
+      {
+        "stateName": "eEnding",
+        "callFunc": [
+          "changeState(eGameState.eEnd)"
+          ]
+      },
+      {
+        "stateName": "eEnd",
+        "callFunc": []
+      }
+    ]
+  },
+  "ctrl": {
+    "GameCtrl": {
+      "state": "eGameState",
+      "param": [],
+      "callFunc": [
+      ]
+    }
+  }
+}
