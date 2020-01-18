@@ -185,11 +185,11 @@ makeCtrlFile = function(jsonData)
 
 		params = ""
 		onlOadFunc = "\
-		onLoad() {\
-			\
-			super.onLoad();\
-			this.clearState();\
-		}\n"
+	onLoad() {\
+		\
+		super.onLoad();\
+		this.clearState();\
+	}\n"
 
 		startFunc = ""
 

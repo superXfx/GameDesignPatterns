@@ -1,10 +1,10 @@
 {
-  "fileSuffix": "_Global",
+  "fileSuffix": "_Drag",
   "relativePath": "../../../../../",
   "state": {
-    "eGameState": [
+    "eDragState": [
       {
-        "stateName": "eInitialState",
+        "stateName": "eInit",
         "callFunc": [
           "changeState(eGameState.eLoading)"
         ]
@@ -18,22 +18,57 @@
       {
         "stateName": "ePlaying",
         "callFunc": []
+      }
+    ],
+
+    "eAnswerState": [
+      {
+        "stateName": "eInit",
+        "callFunc": []
       },
       {
-        "stateName": "eEnding",
-        "callFunc": [
-          "changeState(eGameState.eEnd)"
-          ]
+        "stateName": "eShowAnswer",
+        "callFunc": []
+      }
+    ],
+
+    "eOptionState": [
+      {
+        "stateName": "eInit",
+        "callFunc": []
       },
       {
-        "stateName": "eEnd",
+        "stateName": "eMove",
+        "callFunc": []
+      },
+      {
+        "stateName": "eBack",
+        "callFunc": []
+      },
+      {
+        "stateName": "eLock",
         "callFunc": []
       }
     ]
   },
+
   "ctrl": {
-    "GameCtrl": {
-      "state": "eGameState",
+    "DragCtrl": {
+      "state": "eDragState",
+      "param": [],
+      "callFunc": [
+      ]
+    },
+
+    "AnswerCtrl": {
+      "state": "eAnswerState",
+      "param": [],
+      "callFunc": [
+      ]
+    },
+
+    "OptionCtrl": {
+      "state": "eOptionState",
       "param": [],
       "callFunc": [
       ]
