@@ -68,7 +68,7 @@ makeStateFile = function(jsonData)
 
 
 	local stateBase = "import StateBase from \""..relativePath.."Script/DesignPatterns/FSM/StateBase\";\n"
-	local Enums = "import ".. mEnumNames .. " from \"../"..ConstFileName.."\";\n"
+	local Enums = "import ".. "{" .. mEnumNames .. " from \"../"..ConstFileName.."\";\n"
 
 	local importStr = ""
 	importStr = importStr .. stateBase
@@ -112,8 +112,7 @@ makeFactoryFile = function(jsonData)
 		local cases = ""
 
 		importStr = importStr .. "import StateBase from \""..relativePath.."Script/DesignPatterns/FSM/StateBase\";\n"
-		importStr = importStr .. "import ".. mEnumNames .. " from \"../"..ConstFileName.."\";\n"
-		importStr = importStr .. "import {\n "
+		importStr = importStr .. "import ".. "{" .. mEnumNames .. " from \"../"..ConstFileName.."\";\n"
 
 		for key2, stateData in ipairs(var) do
 
@@ -148,7 +147,6 @@ makeFactoryFile = function(jsonData)
 		..cases
 		.."\n\t\t}\
 		\
-		stateInstance.init();\
 		return stateInstance;\
 	}\
 }"
@@ -180,7 +178,7 @@ makeCtrlFile = function(jsonData)
 		importStr = importStr .. "import CtrlBase from \""..relativePath.."Script/DesignPatterns/FSM/CtrlBase\";\n"
 		importStr = importStr .. "import CocosMessageMgr from \""..relativePath.."Script/DesignPatterns/Monitor/CocosMessageMgr\";\n"
 		importStr = importStr .. "import * as Const_Msg_Monitor from \""..relativePath.."Script/DesignPatterns/Monitor/Const_Msg_Monitor\";\n"
-		importStr = importStr .. "import ".. mEnumNames .. " from \"../"..ConstFileName.."\";\n"
+		importStr = importStr .. "import ".."{".. mEnumNames .. " from \"../"..ConstFileName.."\";\n"
 		importStr = importStr .. "import StateFactory".." from \"".."../StateFactory/"..FactoryFileName.."\";\n\n"
 
 		params = ""
@@ -230,10 +228,7 @@ makeCtrlFile = function(jsonData)
 		startFunc = "\t\
 	start()\
 	{\
-		if(this.mIsChangedState === false)\
-		{\
-			this.changeState(eGameState.eInit, null, true);\
-		}\
+		this.changeState(eGameState.eInit, null);\
 	}\n"
 
 	--
@@ -292,7 +287,7 @@ export default class "..CtrlFileName.." extends CtrlBase{\
 	{\
 		if(!this.mIsInit)\
 		{\
-			this.mFSM = new StateMachine(this, StateFactory);\
+			this.setFSM( new StateMachine( this, new StateFactory()) );\
 			this.mIsInit = true;\
 		}\
 	}\
