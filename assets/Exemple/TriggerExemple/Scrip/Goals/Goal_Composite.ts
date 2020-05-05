@@ -1,14 +1,15 @@
 
 import Goal from "./Goal";
-import { eAIState } from "../../../../Script/Const_All";
+import { eAIState } from "./Const_BehaviorTree";
+
 export default class Goal_Composite extends Goal
 {
-    protected mSubGoals: Array<Goal>;
-    
+    protected mSubGoals: Array<Goal_Composite>;
+
     public constructor(param, goalType)
     {
         super(param, goalType);
-        this.mSubGoals = new Array<Goal>();
+        this.mSubGoals = new Array<Goal_Composite>();
     }
 
     public AddSubgoal(goal)
@@ -18,40 +19,14 @@ export default class Goal_Composite extends Goal
 
     protected ProcessSubgoals(dt)
     {
-        for(let i = 0; i < this.mSubGoals.length;)
-        {
-            let goal = this.mSubGoals[i];
-            if(goal.isComplete() || goal.isFailed())
-            {
-                this.mSubGoals[i].Exit();
-                this.mSubGoals.splice(i, 1);
-            }
-            else
-            {
-                i++;
-            }
-        }
-
-        if(this.mSubGoals.length > 0)
-        {
-            let stateOfSubgoals = this.mSubGoals[0].Process(dt);
-            if(stateOfSubgoals === eAIState.eCompleted && this.mSubGoals.length > 1)
-            {
-                return eAIState.eActive;
-            }
-
-            return stateOfSubgoals;
-        }
-        else
-        {
-            return eAIState.eCompleted;
-        }
+        return eAIState.eFailed;
     }
 
     public RemoveAllSubgoals()
     {
         for(let i = 0; i < this.mSubGoals.length;)
         {
+            this.mSubGoals[i].RemoveAllSubgoals();
             this.mSubGoals[i].Exit();
             this.mSubGoals.splice(i, 1);
         }

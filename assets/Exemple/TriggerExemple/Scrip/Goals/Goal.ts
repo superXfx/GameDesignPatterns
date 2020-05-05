@@ -1,5 +1,5 @@
 
-import { eAIState } from "../../../../Script/Const_All";
+import { eAIState } from "./Const_BehaviorTree";
 
 export default class Goal
 {

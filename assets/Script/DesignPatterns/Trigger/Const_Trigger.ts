@@ -7,8 +7,6 @@ export enum eTriggerType
     eToRight,
     eTriggerSlot,
     eChangeHero,
-    eMineral,
-    eBed,
 }
 
 export let TypeToName: Array<string> = [];

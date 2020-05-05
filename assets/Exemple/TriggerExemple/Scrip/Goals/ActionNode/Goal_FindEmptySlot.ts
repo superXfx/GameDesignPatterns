@@ -1,23 +1,16 @@
 
-import Goal from "./Goal";
-import { eAIState, eGoalType } from "../../../../Script/Const_All";
+import Goal_Composite from "../Goal_Composite";
+import { eAIState, eNodeType } from "../Const_BehaviorTree";
 
-export default class Goal_FindEmptySlot extends Goal
+export default class Goal_FindEmptySlot extends Goal_Composite
 {
-    public constructor(owner)
+    public constructor(param)
     {
-        super(owner, eGoalType.eGoal_findEmptySolt);
+        super(param, eNodeType.eGoal_findEmptySolt);
     }
 
     public Enter()
     {
-        this.mState = eAIState.eActive;
-    }
-
-    public Process(dt)
-    {
-        this.ActivateIfInactive();
-
         let state = eAIState.eFailed;
         for(let i = 0; i < this.mParam.answers.length; i++)
         {
@@ -30,6 +23,12 @@ export default class Goal_FindEmptySlot extends Goal
         }
 
         this.mState = state;
+    }
+
+    public Process(dt)
+    {
+        this.ActivateIfInactive();
+
         return this.mState;
     }
 }
